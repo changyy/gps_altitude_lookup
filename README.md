@@ -27,3 +27,11 @@ $google_api_key = "xxxxxx";
 ```
 > grep eva google_query/1.log | awk -F ' ' '{print $3}' | awk -F ',' '{print $1}'
 ```
+
+# Query merge #
+```
+> echo -e "{\n  \"results\": [ " > /tmp/result.log && cat google_query/1.log | sed 's/.*"status".*//' | sed 's/.*"results".*//' |  sed 's/.*],//' |  sed 's/^[}{]//' | sed '/^$/d' >> /tmp/result.log && echo -e "   ]\n}" >> /tmp/result.log
+> vim /tmp/result.log
+:%s/}\n/},\r/g
+> cat /tmp/result.log | jq ''
+```
