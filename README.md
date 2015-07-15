@@ -35,3 +35,7 @@ $google_api_key = "xxxxxx";
 :%s/}\n/},\r/g
 > cat /tmp/result.log | jq ''
 ```
+# accuracy via sed #
+```
+> cat  /tmp/result.log | sed 's/\([0-9]*\.[0-9]\{9\}\)[0-9]*/\1/g' 
+```
