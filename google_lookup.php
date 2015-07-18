@@ -11,8 +11,21 @@ if (!isset($google_api_key)) {
 	exit;
 }
 
-$record_dir = $pwd.'/record';
-$query_dir = $pwd.'/google_query';
+if (!isset($record_dir))
+	$record_dir = $pwd.'/record';
+if (!isset($query_dir))
+	$query_dir = $pwd.'/google_query';
+
+if (!file_exists($record_dir)) {
+	echo "[ERROR] record_dir is not defined\n";
+	exit;
+}
+
+if (!file_exists($query_dir)) {
+	echo "[ERROR] query_dir is not defined\n";
+	exit;
+}
+
 $record_list = array();
 if (is_dir($record_dir) && (($dh = opendir($record_dir)))) {
 	while (false !== ($filename = readdir($dh))) {
