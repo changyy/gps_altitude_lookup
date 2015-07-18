@@ -1,8 +1,16 @@
 <?php
-require 'config.php';	// $google_api_key = 'Google API Key';
 $gapi = 'https://maps.googleapis.com/maps/api/elevation/json';
 
 $pwd = dirname(__FILE__);
+$default_config = $pwd."/config.php";
+if (file_exists($default_config))
+	require $default_config;
+// $google_api_key = 'Google API Key';
+if (!isset($google_api_key)) {
+	echo "[ERROR] google_api_key is not defined\n";
+	exit;
+}
+
 $record_dir = $pwd.'/record';
 $query_dir = $pwd.'/google_query';
 $record_list = array();
